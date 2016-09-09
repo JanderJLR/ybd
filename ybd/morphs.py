@@ -130,11 +130,10 @@ class Morphs(object):
             splits = component.get('artifacts', [])
             dn['contents'][index] = {self._insert(component): splits}
 
-        try:
+        if  (dn.get('ref') is not None ):
             dn['ref'] = str(dn['ref'])
             log('ref is a key {}'.format(dn['ref']))
-        except KeyError as e:
-            pass
+
 
         return self._insert(dn)
 
@@ -205,6 +204,7 @@ class Morphs(object):
 
         dn = self._data.get(new_def['path'])
         if dn:
+
             if (dn.get('ref') is None or new_def.get('ref') is None):
                 for key in new_def:
                     if key is not 'name':
