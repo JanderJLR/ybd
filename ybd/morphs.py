@@ -129,6 +129,7 @@ class Morphs(object):
 
             splits = component.get('artifacts', [])
             dn['contents'][index] = {self._insert(component): splits}
+            dn['ref'] = str(dn['ref'])
 
         return self._insert(dn)
 
