@@ -132,8 +132,9 @@ class Morphs(object):
 
             try:
                 dn['ref'] = str(dn['ref'])
+                log('ref is a key {}'.format(dn['ref']))
             except KeyError as e:
-                log('ref not a key') 
+                pass
 
         return self._insert(dn)
 
