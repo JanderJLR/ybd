@@ -129,7 +129,11 @@ class Morphs(object):
 
             splits = component.get('artifacts', [])
             dn['contents'][index] = {self._insert(component): splits}
-            dn['ref'] = str(dn['ref'])
+
+            try:
+                dn['ref'] = str(dn['ref'])
+            except KeyError as e:
+                log('ref not a key') 
 
         return self._insert(dn)
 
