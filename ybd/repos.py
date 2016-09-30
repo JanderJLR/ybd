@@ -279,7 +279,7 @@ def checkout_submodules(dn):
                     raise Exception
 
                 fulldir = os.path.join(os.getcwd(), path)
-                _checkout(dn['name'], url, submodule_commit, fulldir)
+                _checkout(dn['name'], url, submodule_commit, fulldir, dn)
 
             else:
                 app.log(dn, 'Skipping submodule %s, not a commit:' % path,
