@@ -203,7 +203,7 @@ def _checkout(name, repo, ref, checkout, dn):
             if call(['git', 'checkout', '--force', ref], stdout=fnull,
                     stderr=fnull):
                 app.log(name, 'Git checkout failed for', ref, exit=True)
-            elif os.path.exists('.gitmodules') or dn.get('submodules'):
+            elif os.path.exists('.gitmodules'):
                checkout_submodules(dn)
 
             app.log(name, 'Git checkout %s in %s' % (repo, checkout))
@@ -249,7 +249,6 @@ def checkout_submodules(dn):
         # drop indentation in sections, as RawConfigParser cannot handle it
         content = '\n'.join([l.strip() for l in gitfile.read().splitlines()])
     io = StringIO(content)
-    app.log(dn, io)
     parser = RawConfigParser()
     parser.readfp(io)
 
@@ -280,7 +279,7 @@ def checkout_submodules(dn):
                     raise Exception
 
                 fulldir = os.path.join(os.getcwd(), path)
-                _checkout(dn['name'], url, submodule_commit, fulldir, dn)
+                _checkout(dn['name'], url, submodule_commit, fulldir)
 
             else:
                 app.log(dn, 'Skipping submodule %s, not a commit:' % path,
