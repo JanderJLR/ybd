@@ -177,7 +177,7 @@ def update_mirror(name, repo, gitdir):
 
 
 def checkout(dn):
-    _checkout(dn['name'], dn['repo'], dn['ref'], dn['checkout'], dn.get('submodules')
+    _checkout(dn['name'], dn['repo'], dn['ref'], dn['checkout'], dn.get('submodules'))
 
     utils.set_mtime_recursively(dn['checkout'])
 
