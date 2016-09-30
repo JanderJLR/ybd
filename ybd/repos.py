@@ -286,6 +286,7 @@ def checkout_submodules(dn):
                         fields)
 
         except:
+            app.log(dn, "Unexpected error:", sys.exc_info()[0])
             app.log(dn, "Git submodules problem", exit=True)
 
 
