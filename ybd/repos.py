@@ -249,6 +249,7 @@ def checkout_submodules(dn):
         # drop indentation in sections, as RawConfigParser cannot handle it
         content = '\n'.join([l.strip() for l in gitfile.read().splitlines()])
     io = StringIO(content)
+    app.log(dn, io)
     parser = RawConfigParser()
     parser.readfp(io)
 
