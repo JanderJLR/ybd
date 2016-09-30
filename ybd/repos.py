@@ -177,13 +177,12 @@ def update_mirror(name, repo, gitdir):
 
 
 def checkout(dn):
-    _checkout(dn['name'], dn['repo'], dn['ref'], dn['checkout'])
-
+    _checkout(dn['name'], dn['repo'], dn['ref'], dn['checkout'], dn.get('submodules')
 
     utils.set_mtime_recursively(dn['checkout'])
 
 
-def _checkout(name, repo, ref, checkout):
+def _checkout(name, repo, ref, checkout, submodules):
     gitdir = os.path.join(app.config['gits'], get_repo_name(repo))
     if not os.path.exists(gitdir):
         mirror(name, repo)
@@ -204,7 +203,7 @@ def _checkout(name, repo, ref, checkout):
             if call(['git', 'checkout', '--force', ref], stdout=fnull,
                     stderr=fnull):
                 app.log(name, 'Git checkout failed for', ref, exit=True)
-            elif os.path.exists('.gitmodules') or dn.get('submodules'):
+            elif os.path.exists('.gitmodules') or submodules:
                checkout_submodules(dn)
 
             app.log(name, 'Git checkout %s in %s' % (repo, checkout))
