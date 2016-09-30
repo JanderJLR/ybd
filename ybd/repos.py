@@ -275,6 +275,7 @@ def checkout_submodules(dn):
 
                 # fail if the commit hash is invalid
                 if len(submodule_commit) != 40:
+                    app.log(dn, "submodule commit length invalid")
                     raise Exception
 
                 fulldir = os.path.join(os.getcwd(), path)
